@@ -278,7 +278,7 @@ let printLayout='detailed';
 let recordWeeks=6;
 let recordWeeksPerSheet=3;
 let db=fresh(),tab='Clients',clientId='',programmeId='',editDay=0,search='',eqFilter='',muscleFilter='',kindFilter='',miniClient='',miniSelected=new Set(),swapTarget=null,swapFilters={equipment:'',muscle:'',kind:'',search:''};
-const tabs=['Clients','Exercise Database','Programme Creator','Edit & Print','Workout Mode','Training Record','Templates','Fitness Calculators','Challenges','Mini-App','Coaching Centre','Specialist Programmes','Data & Backup'];
+const tabs=['Clients','Exercise Database','Programme Creator','Edit & Print','Workout Mode','Training Record','Templates','Fitness Calculators','Challenges','Mini-App','Coaching Centre','Specialist Programmes','Recovery Studio','Data & Backup'];
 const dbOpen=()=>new Promise((resolve,reject)=>{const r=indexedDB.open('FitnessManagerRebuiltV1',1);r.onupgradeneeded=()=>r.result.createObjectStore('data');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
 let handle;const read=async()=>{handle=await dbOpen();return new Promise((resolve,reject)=>{const t=handle.transaction('data','readonly').objectStore('data').get('main');t.onsuccess=()=>resolve(t.result);t.onerror=()=>reject(t.error)})};
 const save=async()=>{if(!handle)return;await new Promise((resolve,reject)=>{const t=handle.transaction('data','readwrite');t.objectStore('data').put(db,'main');t.oncomplete=resolve;t.onerror=()=>reject(t.error)});$('savedStatus')?.replaceChildren(document.createTextNode('Saved locally '+new Date().toLocaleTimeString()))};
@@ -373,7 +373,7 @@ async function importSpecialistProgramme(){
     if(days.length>=144)break;
     days.push({name:`Week ${wi+1} · ${String(s.name||'Session '+(si+1)).slice(0,70)}`,style:String(s.focus||data.trainingType||'Specialist'),exercises:(Array.isArray(s.exercises)?s.exercises:[]).slice(0,25).map(e=>{
       const name=String(e.name||'Exercise');const prescription=String(e.prescription||'');const match=db.exercises.find(x=>x.name.toLowerCase()===name.toLowerCase());
-      return {id:uid(),exerciseId:match?.id||'',name,sets:3,reps:prescription||'See notes',rest:60,notes:[String(e.notes||''),e.rest?'Rest: '+e.rest:'',w.focus?'Week focus: '+w.focus:''].filter(Boolean).join(' · ')};
+      return {id:uid(),exerciseId:match?.id||'',name,sets:data.trainingType==='Recovery'?1:3,reps:prescription||'See notes',rest:data.trainingType==='Recovery'?0:60,notes:[String(e.notes||''),e.rest?'Rest: '+e.rest:'',w.focus?'Week focus: '+w.focus:''].filter(Boolean).join(' · ')};
     })});
    }
   }
@@ -408,7 +408,7 @@ window.addEventListener('message',async e=>{
     days.push({name:`Week ${wi+1} · ${String(s.name||'Session '+(si+1)).slice(0,70)}`,style:String(s.focus||data.trainingType||'Specialist'),exercises:(Array.isArray(s.exercises)?s.exercises:[]).slice(0,25).map(ex=>{
       const name=String(ex.name||'Exercise'),prescription=String(ex.prescription||'');
       const match=db.exercises.find(x=>x.name.toLowerCase()===name.toLowerCase());
-      return {id:uid(),exerciseId:match?.id||'',name,sets:3,reps:prescription||'See notes',rest:60,notes:[String(ex.notes||''),ex.rest?'Rest: '+ex.rest:'',w.focus?'Week focus: '+w.focus:''].filter(Boolean).join(' · ')};
+      return {id:uid(),exerciseId:match?.id||'',name,sets:data.trainingType==='Recovery'?1:3,reps:prescription||'See notes',rest:data.trainingType==='Recovery'?0:60,notes:[String(ex.notes||''),ex.rest?'Rest: '+ex.rest:'',w.focus?'Week focus: '+w.focus:''].filter(Boolean).join(' · ')};
     })});
    }
   }
@@ -425,7 +425,7 @@ window.addEventListener('message',async e=>{
 });
 function shell(){ $('nav').innerHTML=`<label class="sr-only" for="clientSection">Section</label><select id="clientSection">${tabs.map(t=>`<option ${t===tab?'selected':''}>${esc(t)}</option>`).join('')}</select>`;$('clientSection').onchange=e=>{if(typeof aiRememberForm==='function')aiRememberForm();tab=e.target.value;render();if(tab==='Workout Mode')renderWorkoutItems()};$('app').innerHTML=`<div id="view"></div><div class="tiny muted no-print" id="savedStatus">Stored locally in this browser · Back up regularly</div>`;renderView()}
 function render(){shell()}
-function renderView(){const v=$('view');if(!v)return;const fn=({ 'Clients':viewClients,'Exercise Database':viewExercises,'Programme Creator':viewCreator,'Edit & Print':viewEdit,'Workout Mode':viewWorkout,'Training Record':viewRecords,'Templates':viewTemplates,'Fitness Calculators':viewCalculators,'Challenges':viewChallenges,'Mini-App':viewMini,'Coaching Centre':viewCoaching,'Data & Backup':viewData,'Specialist Programmes':()=>'<iframe id="specialistCentreFrame" title="Specialist Performance Studio" src="specialist-performance.html"></iframe>'})[tab];v.innerHTML=fn();if(tab==='Programme Creator'){const pane=$('creatorAiPanel');if(pane){pane.open=sessionStorage.getItem('fpm_creator_ai_open')==='1';pane.addEventListener('toggle',()=>{sessionStorage.setItem('fpm_creator_ai_open',pane.open?'1':'0');if(pane.open)aiRestoreView()});if(pane.open)aiRestoreView()}}}
+function renderView(){const v=$('view');if(!v)return;const fn=({ 'Clients':viewClients,'Exercise Database':viewExercises,'Programme Creator':viewCreator,'Edit & Print':viewEdit,'Workout Mode':viewWorkout,'Training Record':viewRecords,'Templates':viewTemplates,'Fitness Calculators':viewCalculators,'Challenges':viewChallenges,'Mini-App':viewMini,'Coaching Centre':viewCoaching,'Data & Backup':viewData,'Recovery Studio':()=>'<iframe id="specialistCentreFrame" title="Recovery Studio" src="rehab.html"></iframe>','Specialist Programmes':()=>'<iframe id="specialistCentreFrame" title="Specialist Performance Studio" src="specialist-performance.html"></iframe>'})[tab];v.innerHTML=fn();if(tab==='Programme Creator'){const pane=$('creatorAiPanel');if(pane){pane.open=sessionStorage.getItem('fpm_creator_ai_open')==='1';pane.addEventListener('toggle',()=>{sessionStorage.setItem('fpm_creator_ai_open',pane.open?'1':'0');if(pane.open)aiRestoreView()});if(pane.open)aiRestoreView()}}}
 const opt=(items,selected,placeholder='Select')=>`<option value="">${esc(placeholder)}</option>`+items.map(x=>`<option value="${esc(x.id)}" ${x.id===selected?'selected':''}>${esc(x.name)}</option>`).join('');
 const clientPick=()=>`<select id="pickClient">${opt(db.clients,clientId,'Select a client')}</select>`;
 const programmePick=(cid=clientId)=>`<select id="pickProgramme">${opt(db.programmes.filter(p=>p.clientId===cid).map(p=>({id:p.id,name:dateLabel(p)})),programmeId,'Select approved programme')}</select>`;
