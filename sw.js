@@ -1,4 +1,4 @@
-const CACHE="fitness-client-v6-"+self.registration.scope;
+const CACHE="fitness-client-v6.1-"+self.registration.scope;
 const ASSETS=["./rehab-v53.js","./rehab.html","./rehab.js","./rehab-v5.js","./client-themes.js","./client-themes.css","./specialist-performance.html","./specialist-icon.png","./client-layout.css","./client-layout.js","./client-pictures.js","./client-icon-192.png", "./index.html", "./client-cloud.js", "./hub-ai.js", "./hub-v63.css", "./layout-v79.js", "./manifest.webmanifest", "./equipment-v81.js", "./install.js", "./layout-v79.css", "./shared-exercises.js", "./shared-ui.js", "./client-icon-512.png"];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
