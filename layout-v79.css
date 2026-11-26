@@ -1,0 +1,32 @@
+/* Layout only: no storage or programme changes. */
+@media screen {
+body{max-width:none!important;box-sizing:border-box} .shell{max-width:none!important;padding:6px!important} iframe{max-width:100%;box-sizing:border-box}
+body.v79-embedded{padding:4px!important;margin:0!important} body.v79-embedded>header{display:none!important}
+body.v79-embedded>.card,body.v79-embedded>section.card,body.v79-embedded>details.card{padding:8px!important;margin:5px 0!important;min-width:0}
+#classBuilderStudioFrame,#circuitStudioFrame,#pilatesStudioFrame,#seniorsStudioFrame{border:0!important;border-radius:0!important;width:100%!important}
+#circuitStudioHost>div:first-child{display:none!important} #circuitStudioHost{padding:0!important;margin:0!important}
+#tabs.v79-tabs{display:flex!important;gap:6px!important;overflow:visible!important;position:static!important;margin:4px 0!important;padding:0!important} #tabs.v79-tabs>button[data-type]{display:none!important} #tabs.v79-tabs select{flex:1;min-width:0}
+#circuitV53Nav,#instructorQuickBar{position:static!important;inset:auto!important;margin:4px 0!important;padding:4px!important;box-shadow:none!important;flex-wrap:wrap!important;overflow:visible!important;min-height:0!important} #circuitV53Nav button{flex:1 1 auto!important;min-width:0!important;font-size:12px!important;padding:7px!important}
+#setupSection .setup-fields{gap:6px!important} #setupSection input,#setupSection select{min-width:0!important;max-width:100%!important;padding:7px!important} #setupSection label{font-size:12px!important}
+.v79-shared{position:static!important;inset:auto!important;margin:4px 0!important;padding:7px 10px!important;font-size:12px!important;border-radius:7px!important;max-width:100%}
+#library>h2,#library>p.muted,#equipmentstudio>div:first-child{display:none!important} #equipmentstudio>iframe{border:0!important;border-radius:0!important}
+#exerciseSafeToolbar{position:relative!important;top:auto!important;z-index:20!important;margin:0 0 5px!important;padding:4px!important} #exerciseSafeToolbar .safe-scroll{display:flex!important;flex-wrap:wrap!important;gap:4px!important;overflow:visible!important} #exerciseSafeToolbar button,#exerciseSafeToolbar summary{font-size:12px!important;padding:7px!important;min-height:32px!important} #exerciseSafeToolbar .safe-popup{max-width:calc(100vw - 24px)!important;box-sizing:border-box} #exerciseSafeSearch{margin:4px 0!important;padding:3px!important} #exerciseSafeSearch label{display:none!important}
+#exerciseSafeContent .card{padding:5px!important;margin:4px 0!important} #exerciseList,#exerciseV25Results{gap:5px!important;grid-template-columns:repeat(auto-fill,minmax(125px,1fr))!important} .v76-tile{min-height:70px!important;padding:5px!important} .v76-tile img{height:48px!important} #equipmentManagerList .equipment-manager-grid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))!important;gap:5px!important} #equipmentManagerList .equipment-manager-item{padding:5px!important;font-size:12px!important}
+.v79-fold{margin:4px 0;padding:5px;border:1px solid #aabdc5;border-radius:7px} .v79-fold>summary{cursor:pointer;font-weight:650;font-size:13px;padding:5px}
+}
+@media screen {
+html,body{width:100%!important;max-width:100%!important;margin-inline:0!important;box-sizing:border-box}
+body>main.shell,body>main,body>.wrap,body>.shell{width:100%!important;max-width:none!important;min-width:0!important;margin-inline:0!important;box-sizing:border-box}
+main.shell>section{max-width:none!important;min-width:0!important;box-sizing:border-box}
+}
+@media screen {
+#equipmentManagerList,#equipmentManagerList .equipment-manager-grid,#exerciseList,#exerciseV25Results,#studio32Results{max-height:none!important;height:auto!important;overflow:visible!important;overscroll-behavior:auto!important}
+#equipmentManagerList .equipment-manager-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,120px),1fr))!important;align-items:stretch!important;gap:6px!important}
+#equipmentManagerList .equipment-manager-item{min-width:0!important;min-height:0!important;padding:0!important;overflow:hidden!important}
+#equipmentManagerList .equipment-manager-item>.studio26-head[hidden]{display:none!important}
+.equipment-v81-tile{display:flex!important;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;width:100%;height:100%;min-height:96px;padding:7px!important;background:transparent!important;color:inherit!important;border:0!important;white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important;text-align:center;font-size:12px!important;line-height:1.25!important}
+.equipment-v81-tile .studio26-photo,.equipment-v81-tile .studio26-photo-empty{width:100%!important;height:58px!important;min-width:0!important;object-fit:contain!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center!important;flex:none!important}
+#equipmentV81Dialog{width:min(620px,92vw);max-height:85dvh;overflow:auto;overscroll-behavior:contain;border:1px solid #9db4c8;border-radius:12px;padding:14px;background:var(--card,#fff);color:var(--text,#17283b)}
+#equipmentV81Dialog::backdrop{background:#10283b99}#equipmentV81Dialog .studio26-head{display:flex;flex-wrap:wrap;gap:12px}#equipmentV81Dialog .studio26-main{flex:1 1 240px;min-width:0}#equipmentV81Dialog .studio26-photo{width:110px;height:110px;object-fit:contain}#equipmentV81Dialog .studio26-actions{display:flex;flex-wrap:wrap;gap:6px}.equipment-v81-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+body.v79-embedded{overscroll-behavior-y:auto!important;touch-action:pan-y pinch-zoom} #exerciseSafeToolbar .safe-scroll,#circuitV53Nav{touch-action:pan-y pinch-zoom} .v79-fold{min-width:0} 
+}
