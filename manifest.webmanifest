@@ -1,7 +1,7 @@
 {
   "id": "./fitness-programme-manager-v1",
-  "name": "Fitness Programme Manager",
-  "short_name": "Fitness Manager",
+  "name": "Client Manager",
+  "short_name": "Client Manager",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
